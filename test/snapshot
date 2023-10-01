@@ -1,0 +1,4 @@
+[dump] Object(2) {42: baz, foo: bar } Array(2) [1, 2] hello 42
+[dump] null Symbol(hello)
+[dump] Array(2) [1, Array(4) [foo, bar, baz, 'empty_string']]
+[dump] Map(2) [foo: bar, 42: baz]
