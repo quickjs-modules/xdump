@@ -6,8 +6,7 @@ const _DEFAULT_CONFIG = {
   finalNewline: true,
 };
 
-export default function xdump(...args) {
-  const config = _DEFAULT_CONFIG;
+export function _xdump(...args) {
   const pieces = [];
   let result = "";
 
@@ -15,13 +14,13 @@ export default function xdump(...args) {
     pieces.push(format(a));
   }
 
-  if (config.prefix) {
-    result += config.prefix + " ";
+  if (this.prefix) {
+    result += this.prefix + " ";
   }
 
-  result += pieces.join(config.delimiter);
+  result += pieces.join(this.delimiter);
 
-  if (config.finalNewline) {
+  if (this.finalNewline) {
     result += "\n";
   }
 
@@ -99,3 +98,11 @@ function typeOf(value) {
 
   return typeof value;
 }
+
+export default function xdump(...args) {
+  return _xdump.apply(_DEFAULT_CONFIG, args);
+}
+
+xdump.configure = function (config) {
+  return _xdump.bind(Object.assign({}, _DEFAULT_CONFIG, config));
+};

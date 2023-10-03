@@ -2,3 +2,4 @@
 [dump] null Symbol(hello)
 [dump] Array(2) [1, Array(4) [foo, bar, baz, 'empty_string']]
 [dump] Map(2) [foo: bar, 42: baz]
+[log] hello | world | 42

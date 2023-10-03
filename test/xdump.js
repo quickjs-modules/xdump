@@ -9,3 +9,7 @@ xdump(
     [42, "baz"],
   ])
 );
+
+const log = xdump.configure({ prefix: "[log]", delimiter: " | " });
+
+log("hello", "world", 42);
