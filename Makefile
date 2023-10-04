@@ -17,13 +17,16 @@ $(TEST_OUTPUT) $(TEST_SNAPSHOT): $(TEST_FILE)
 test: $(TEST_OUTPUT)
 	diff --brief $? $(TEST_SNAPSHOT)
 
-release:
+xdump.tar: LICENSE README.md xdump.js
+	tar cf $@ $?
+
+release: test xdump.tar
 ifndef VERSION
 	$(error VERSION is not set)
 endif
-	tar cf xdump-$(VERSION).tar LICENSE README.md xdump.js
+	./release.sh $(VERSION)
 
 clean:
-	rm -rf $(TEST_OUTPUT) xdump-*.tar
+	rm -rf $(TEST_OUTPUT) xdump.tar
 
-.PHONY: format test run clean
+.PHONY: format test run clean release
