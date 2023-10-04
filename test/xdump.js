@@ -9,6 +9,7 @@ xdump(
     [42, "baz"],
   ])
 );
+xdump(new Set([1, 2, 3, "foo", "bar", "baz"]));
 
 const log = xdump.configure({ prefix: "[log]", delimiter: " | " });
 

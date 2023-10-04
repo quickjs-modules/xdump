@@ -27,61 +27,50 @@ export function _xdump(...args) {
   std.out.puts(result);
 }
 
-function formatArray(obj) {
-  return `Array(${obj.length}) [${obj.map((item) => format(item)).join(", ")}]`;
-}
-
 function format(value) {
   const type = typeOf(value);
   switch (type) {
     case "null":
-    case "undefined": {
+    case "undefined":
       return type;
-    }
 
-    case "array": {
-      return formatArray(value);
-    }
+    case "array":
+      return formatArray(value, "Array");
 
     case "map":
-      return formatMap(value);
+      return formatKeyValue(Array.from(value), "Map");
 
     case "object":
-      return formatObject(value);
+      return formatKeyValue(Object.entries(value), "Object");
 
-    case "symbol": {
+    case "set":
+      return formatArray(Array.from(value), "Set");
+
+    case "symbol":
       return value.toString();
-    }
 
     case "string":
-      if (value.length === 0) {
-        return "'empty_string'";
-      }
+      if (value.length === 0) return "'empty_string'";
+      return value;
 
     default:
-      return value;
+      return String(value);
   }
 }
 
-function formatMap(obj) {
-  const entries = Array.from(obj);
-  return (
-    `Map(${entries.length}) [` +
-    entries
-      .map(([key, value]) => `${format(key)}: ${format(value)}`)
-      .join(", ") +
-    "]"
-  );
+function formatArray(items, desc) {
+  return `${desc}(${items.length}) [${items
+    .map((item) => format(item))
+    .join(", ")}]`;
 }
 
-function formatObject(obj) {
-  const entries = Object.entries(obj);
+function formatKeyValue(entries, desc) {
   return (
-    `Object(${entries.length}) {` +
+    `${desc}(${entries.length}) {` +
     entries
       .map(([key, value]) => `${format(key)}: ${format(value)}`)
       .join(", ") +
-    " }"
+    "}"
   );
 }
 
