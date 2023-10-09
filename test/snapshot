@@ -1,6 +1,6 @@
-[dump] Object(2) [42: baz, foo: bar] Array(2) [1, 2] hello 42
+[dump] Object(2) {42: baz, foo: bar} Array(2) [1, 2] hello 42
 [dump] null Symbol(hello)
 [dump] Array(2) [1, Array(4) [foo, bar, baz, 'empty_string']]
-[dump] Map(2) [foo: bar, 42: baz]
+[dump] Map(2) {foo: bar, 42: baz}
 [dump] Set(6) [1, 2, 3, foo, bar, baz]
 [log] hello | world | 42
