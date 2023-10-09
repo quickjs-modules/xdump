@@ -15,12 +15,12 @@ $(TEST_OUTPUT) $(TEST_SNAPSHOT): $(TEST_FILE)
 	qjs $? > $@
 
 test: $(TEST_OUTPUT)
-	diff --brief $? $(TEST_SNAPSHOT)
+	diff $? $(TEST_SNAPSHOT)
 
 xdump.tar: LICENSE README.md xdump.js
 	tar cf $@ $?
 
-release: test xdump.tar
+release: clean test xdump.tar
 ifndef VERSION
 	$(error VERSION is not set)
 endif
